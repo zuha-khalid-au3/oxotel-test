@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd oxotel && npm start",
-    "server": "nodemon ./server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run start\""
+    "start": "cd oxotel && npm start && nodemon ./server/index.js"
   },
   "keywords": [],
   "author": "",
