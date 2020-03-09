@@ -2,15 +2,21 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const controllers = require('./server_config/controllers')
 const app = express();
-const cors = require('cors')
+const cors = require('cors');
+const path = require('path');
+const port = process.env.PORT || 3000;
+
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
+const publicPath = path.join(__dirname, '..', 'public');
+app.use(express.static(publicPath));
 
 
-
-
+app.get('*', (req, res) => {
+   res.sendFile(path.join(publicPath, 'index.html'));
+});
 app.post('/login', async (req, res) => {
     let result = {};
     try {
@@ -94,9 +100,8 @@ app.delete("/users", async (req, res) => {
 })
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
-});
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}!`);
+ });
 
 
